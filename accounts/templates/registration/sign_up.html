@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Create Account {% endblock title %}
+
+{% block style %}
+
+{% endblock style %}
+
+{% block content %}
+
+  <div class="sign-up-body">
+    {% if request.user.is_authenticated %}
+      <p>you are already signed</p>
+    {% else %}
+      {% if form.errors %}
+        <p>Something went wrong. Please try again later</p>
+        <form class="" action="" method="post" data_validate_url="{% url 'validate_user' %}" >
+          {% csrf_token %}
+          <p>The password shoud contain LowerCase,UpperCase,Digitss, and Special Characters...</p>
+          <label for="{{form.username.label}}">{{form.username.label}}</label> <br>{{form.username}} <br><br>
+          <label for="{{form.password1.label}}">{{form.password1.label}}</label> <br>{{form.password1}} <br><br>
+          <label for="{{form.password2.label}}">{{form.password2.label}}</label> <br>{{form.password2}} <br><br>
+          <input type="submit" name="" value="Sing In">
+        </form>
+      {% else %}
+        <form class="" action="" method="post" data-validate-url="{% url 'validate_user' %}">
+          {% csrf_token %}
+          <p>The password shoud contain LowerCase,UpperCase,Digits, and Special Characters...</p>
+          <label for="{{form.username.label}}">{{form.username.label}}</label> <br>{{form.username}} <br><br>
+          <label for="{{form.password1.label}}">{{form.password1.label}}</label> <br>{{form.password1}} <br><br>
+          <label for="{{form.password2.label}}">{{form.password2.label}}</label> <br>{{form.password2}} <br><br>
+          <input type="submit" name="" value="Sing In">
+        </form>
+      {% endif %}
+    {% endif %}
+  </div>
+
+{% endblock content %}

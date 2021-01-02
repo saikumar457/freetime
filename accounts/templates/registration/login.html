@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %} {% endblock title %}
+
+{% block style %}
+
+{% endblock style %}
+
+{% block content %}
+  <div class="login-body">
+    {% if request.user.is_authenticated %}
+      <p>You are already logged in</p>
+    {% else %}
+      {% if form.errors %}
+        <p>Please provide correct credientals</p>
+        <form class="" action="" method="post">
+          {% csrf_token %}
+          {{form.as_p}}
+          <input type="submit" name="" value="Log In">
+        </form>
+        <a href="{% url 'sign_up' %}">Create New Account</a>
+      {% else %}
+        <form class="" action="" method="post">
+          {% csrf_token %}
+          {{form.as_p}}
+          <input type="submit" name="" value="Log In">
+        </form>
+        <a href="{% url 'sign_up_check' %}">Create New Account</a>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endblock content %}

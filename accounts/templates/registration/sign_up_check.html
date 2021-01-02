@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %} Create New Account {% endblock title %}
+
+{% block style %}
+  <script src="{% static 'accounts/js/sign_up.js' %}" charset="utf-8"></script>
+{% endblock style %}
+
+{% block content %}
+  <div class="login-body">
+    <div class="errors">
+      <p style="display:none;color:red;" id="user-error">This User is already existed.</p>
+      <p style="display:none;color:red;" id="mail-error">This Mail is already registered.</p>
+    </div>
+    {% if request.user.is_authenticated %}
+      <p>Your logged in </p>
+    {% else %}
+      {% if form.errors %}
+        <p>Password shoud contain LowerCase,UpperCase,Digits & Sepecial Characters....</p>
+        <p>Fill sign up Form correctly.</p>
+        <form class="" action="" method="post" data-validate-url="{% url 'validate_user' %}">
+          {% csrf_token %}
+          <label for="">{{form.username.label}}</label><br>{{form.username}}<br>
+          <label for="">{{form.email.label}}</label><br>{{form.email}}<br>
+          <label for="">{{form.password1.label}}</label><br>{{form.password1}}<br>
+          <label for="">{{form.password2.label}}</label><br>{{form.password2}}<br><br>
+          <input type="submit" name="" value="Create">
+        </form>
+      {% else %}
+        <p>Password shoud contain LowerCase,UpperCase,Digits & Sepecial Characters....</p>
+        <form class="" action="" method="post" data-validate-url="{% url 'validate_user' %}">
+          {% csrf_token %}
+          <label for="">{{form.username.label}}</label><br>{{form.username}}<br>
+          <label for="">{{form.email.label}}</label><br>{{form.email}}<br>
+          <label for="">{{form.password1.label}}</label><br>{{form.password1}}<br>
+          <label for="">{{form.password2.label}}</label><br>{{form.password2}}<br><br>
+          <input type="submit" name="" value="Create">
+        </form>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endblock content %}
